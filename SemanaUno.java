@@ -17,7 +17,7 @@ public class SemanaUno {
       Crud crud = new Crud();
       
       crud.precargaAlumnos();
-      crud.encotrarAlumno();
+      crud.menu();
     }
     
 }
