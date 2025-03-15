@@ -25,7 +25,7 @@ public class Crud {
                  System.out.println("1. Registar alumno"); 
                  System.out.println("2. Mostrar alumnos registrados"); 
                  System.out.println("3. Modificar dato/s de un alumno"); 
-                 System.out.println("4. Eliminra registro de alumno"); 
+                 System.out.println("4. Eliminar registro de alumno"); 
                  System.out.println("5. Salir del programa");
                  op=entrada.nextLine();
                  if(op==1 || op==2 || op==3 || op==4 || op==5){
@@ -58,9 +58,9 @@ public class Crud {
     
     public void precargaAlumnos(){
     
-    alum.add(new Alumno("222", "jorge", "ie", "21", "f"));
-    alum.add(new Alumno("333", "alonso", "ie", "21", "f"));
-    alum.add(new Alumno("444", "michael", "ie", "36", "f"));
+    alum.add(new Alumno("222", "jorge", "ie", "21", "m"));
+    alum.add(new Alumno("333", "alonso", "ie", "21", "m"));
+    alum.add(new Alumno("444", "michael", "ie", "36", "m"));
     alum.add(new Alumno("111", "reiko", "ie", "19", "f"));
     }
     
@@ -81,14 +81,27 @@ public class Crud {
          
          System.out.println("Ingrese el genero del alumno: ");
          String genero = entrada.nextLine();
-            
-         alum.add(new Alumno(id, name, carrera, edad, genero));
-  
+          for (Alumno al: alum) {
+             if (id.equals(al.getId())) {
+                encontrado= true;
+                System.out.println("Este Id ya existe en el registro");
+                break;
+             }
     }
+         if (!encontrado) {
+         alum.add(new Alumno(id, name, carrera, edad, genero));
+         System.out.println("Alumno creado exitosamente");  
+         }
+        menu();
+        }
+            
+
+    
     public void mostrarAlumnos(){
         for (Alumno al: alum) {
             System.out.println(al);
         }
+        menu();
 }
    /* public void encotrarAlumno(){
         boolean encontrado = false;
@@ -102,8 +115,7 @@ public class Crud {
          }
     }
          if (!encontrado) {
-          System.out.println("Id no existe");
-             
+          System.out.println("Id no existe");  
          }
         
          }*/
@@ -112,19 +124,19 @@ public class Crud {
     
     public void eliminarAlumnos(){
     boolean encontrado = false;
-    System.out.println("Ingrese el id a buscar");
+    System.out.println("Ingrese el id a eliminar");
     String id = entrada.nextLine();
     for (Alumno al: alum) {
          if (id.equals(al.getId())) {
             encontrado= true;
             Alumno.remove(alum);
              System.out.println("Alumno eliminado con exito");
-            break;
+            menu();
          }
     }
          if (!encontrado) {
           System.out.println("Id no existe");
-             
+            eliminarAlumno(); 
          }
     }
     public void modificarAlumno(){
@@ -142,7 +154,7 @@ public class Crud {
                  System.out.println("2. Carrera"); 
                  System.out.println("3. Edad"); 
                  System.out.println("4. Genero"); 
-                 System.out.println("5. Volver al menú");
+                 System.out.println("5. Volver al menú principal");
                  op=entrada.nextLine();
                  if(op==1 || op==2 || op==3 || op==4 || op==5){
                      validacion= true;
@@ -174,12 +186,12 @@ public class Crud {
                  System.out.println("Entrada invalida"); 
           }
              System.out.println("Alumno modificado con exito");
-            break;
+            menu();
          }
     }
          if (!encontrado) {
           System.out.println("Id no existe");
-             
+             modificarAlumno();
          }  
     }
 }
